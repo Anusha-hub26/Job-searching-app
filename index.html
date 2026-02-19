@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Search App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+
+      /* Modern Gradient Background */
+      background: linear-gradient(120deg, #ff9a9e, #11763b, #fad0c4);
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .search-box {
+      margin: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      border: none;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #2b7a95;
+      color: white;
+    }
+
+    .jobs {
+      max-width: 700px;
+      margin: 20px auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      padding: 20px;
+      margin: 15px;
+      border-radius: 15px;
+      text-align: left;
+      color: black;
+    }
+
+    .card h3 {
+      margin: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>💼 Job Search App</h1>
+
+<div class="search-box">
+  <input type="text" id="keyword" placeholder="Job title (e.g. Developer)">
+  <input type="text" id="location" placeholder="Location">
+  <button onclick="searchJobs()">Search</button>
+</div>
+
+<div class="jobs" id="jobList"></div>
+
+<script>
+
+const jobs = [
+  { title: "Frontend Developer", location: "Hyderabad", company: "Tech Solutions" },
+  { title: "Java Developer", location: "Bangalore", company: "Infosys" },
+  { title: "Software Engineer", location: "Chennai", company: "TCS" },
+  { title: "Backend Developer", location: "Hyderabad", company: "Wipro" },
+  { title: "Data Analyst", location: "Mumbai", company: "Accenture" }
+];
+
+function searchJobs() {
+  const keyword = document.getElementById("keyword").value.toLowerCase();
+  const location = document.getElementById("location").value.toLowerCase();
+  const jobList = document.getElementById("jobList");
+
+  jobList.innerHTML = "";
+
+  const filtered = jobs.filter(job =>
+    job.title.toLowerCase().includes(keyword) &&
+    job.location.toLowerCase().includes(location)
+  );
+
+  if (filtered.length === 0) {
+    jobList.innerHTML = "<p>No jobs found</p>";
+    return;
+  }
+
+  filtered.forEach(job => {
+    jobList.innerHTML += `
+      <div class="card">
+        <h3>${job.title}</h3>
+        <p><strong>Company:</strong> ${job.company}</p>
+        <p><strong>Location:</strong> ${job.location}</p>
+      </div>
+    `;
+  });
+}
+
+</script>
+
+</body>
+</html>s
